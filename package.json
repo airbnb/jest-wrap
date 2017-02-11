@@ -1,0 +1,115 @@
+{
+	"name": "jest-wrap",
+	"version": "0.0.0",
+	"description": "Fluent pluggable interface for easily wrapping `describe` and `it` blocks in Jest tests.",
+	"author": "Jordan Harband <ljharb@gmail.com>",
+	"contributors": [
+		{
+			"name": "Jordan Harband",
+			"email": "ljharb@gmail.com",
+			"url": "http://ljharb.codes"
+		},
+		{
+			"name": "Joe Lencioni",
+			"email": "joe.lencioni@gmail.com",
+			"url": "https://twitter.com/lencioni"
+		}
+	],
+	"main": "index.js",
+	"jest": {
+		"collectCoverage": false,
+		"collectCoverageFrom": ["<rootDir>/*.js"],
+		"coverageDirectory": "<rootDir>/coverage/jest",
+		"testPathDirs": [
+			"<rootDir>/test"
+		],
+		"testRegex": "\\.js"
+	},
+	"scripts": {
+		"prepublish": "safe-publish-latest",
+		"pretest": "npm run --silent lint",
+		"test": "npm run --silent tests-only",
+		"posttest": "npm run --silent security",
+		"tests-only": "npm run --silent tape | faucet && npm run --silent jest18",
+		"lint": "eslint '**/*.js'",
+		"security": "nsp check",
+		"tape": "node test/tape",
+		"jest": "npm run --silent jest:standard && npm run --silent jest:only",
+		"jest:standard": "jest test/jest/*",
+		"jest:only": "jest test/jest-only/*",
+		"install:jest18.0": "npm install --silent jest@18.0.0 && jest --version",
+		"install:jest18.x": "npm install --silent jest@18.x && jest --version",
+		"jest18.0": "npm run --silent install:jest18.0 && npm run --silent jest",
+		"jest18.x": "npm run --silent install:jest18.x && npm run --silent jest",
+		"jest18": "npm run --silent jest18.0 && npm run --silent jest18.x",
+		"coverage": "npm run --silent jest18.0 && npm run --silent cover:clean && npm run --silent cover:tape && npm run --silent cover:jest && npm run --silent cover:merge && npm run --silent cover:check",
+		"cover:clean": "rimraf coverage",
+		"cover:check": "istanbul check-coverage && echo 100% code coverage, achievement unlocked!",
+		"cover:merge": "istanbul-merge --out coverage/coverage.raw.json 'coverage/*/coverage.raw.json' && istanbul report --format html",
+		"cover:tape": "istanbul cover test/tape --dir coverage/tape",
+		"cover:jest": "npm run --silent cover:jest:standard && npm run --silent cover:jest:only",
+		"cover:jest:standard": "npm run jest:standard -- --coverage --coverageDirectory coverage/jest",
+		"cover:jest:only": "npm run jest:only -- --coverage --coverageDirectory coverage/jest-only"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ljharb/jest-wrap.git"
+	},
+	"keywords": [
+		"jest",
+		"test",
+		"javascript",
+		"js",
+		"chai",
+		"before",
+		"after",
+		"beforeEach",
+		"afterEach",
+		"describe",
+		"it",
+		"wrap",
+		"around",
+		"around_filter",
+		"mock",
+		"stub"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ljharb/jest-wrap/issues"
+	},
+	"homepage": "https://github.com/ljharb/jest-wrap#readme",
+	"dependencies": {
+		"define-properties": "^1.1.2",
+		"for-each": "^0.3.2",
+		"function-bind": "^1.1.0",
+		"has": "^1.0.1",
+		"is-callable": "^1.1.3",
+		"is-primitive": "^2.0.0",
+		"is-string": "^1.0.4",
+		"is-symbol": "^1.0.1",
+		"isarray": "^1.0.0 || ^2.0.1",
+		"object-inspect": "^1.2.1",
+		"object.entries": "^1.0.4",
+		"function.prototype.name": "^1.0.0"
+	},
+	"peerDependencies": {
+		"jest": "^18.0.0"
+	},
+	"devDependencies": {
+		"@ljharb/eslint-config": "^11.0.0",
+		"eslint": "^3.15.0",
+		"faucet": "^0.0.1",
+		"istanbul": "1.1.0-alpha.1",
+		"istanbul-lib-coverage": "^1.0.1",
+		"istanbul-merge": "^1.1.1",
+		"jest": "^18.1.0",
+		"parallelshell": "^2.0.0",
+		"rimraf": "^2.5.4",
+		"safe-publish-latest": "^1.1.1",
+		"tape": "^4.6.3",
+		"nsp": "^2.6.2"
+	},
+	"engines": {
+		"node": ">= 0.4"
+	}
+}
