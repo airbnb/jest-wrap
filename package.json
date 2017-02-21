@@ -13,18 +13,20 @@
 			"name": "Joe Lencioni",
 			"email": "joe.lencioni@gmail.com",
 			"url": "https://twitter.com/lencioni"
+		},
+		{
+			"name": "Gary Borton",
+			"email": "gdborton@gmail.com",
+			"url": "https://twitter.com/garyborton"
 		}
 	],
 	"main": "index.js",
 	"jest": {
 		"collectCoverage": false,
-		"collectCoverageFrom": [
-			"<rootDir>/*.js"
-		],
 		"roots": [
 			"<rootDir>/test"
 		],
-		"testRegex": "\\.js"
+		"testRegex": "test/.*\\.js$"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
