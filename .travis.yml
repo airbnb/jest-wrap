@@ -24,8 +24,6 @@ matrix:
       env: PRETEST=true
     - node_js: "node"
       env: POSTTEST=true
-    - node_js: "4"
-      env: COVERAGE=true
     - node_js: "7.6"
       env: TEST=true ALLOW_FAILURE=true
     - node_js: "7.5"
