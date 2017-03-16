@@ -259,7 +259,7 @@ JestWrapper.prototype.use = function use(plugin) {
 		instance = wrap().extend(descriptorOrInstance.description, descriptorOrInstance);
 	}
 
-	return concatThis(this, [instance]);
+	return setThisWrappers(new JestWrapper(), [instance]);
 };
 
 wrap.register = function register(plugin) {

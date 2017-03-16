@@ -14,6 +14,28 @@ describe('core JestWrapper semantics', function () {
 		return { description: 'i am pointless' };
 	};
 
+	var testingCount = 0;
+	var withTesting = function withTesting() {
+		return this.extend('(with Testing)', {
+			beforeEach: function withTestingBeforeEach() {
+				testingCount += 1;
+			}
+		});
+	};
+
+	var withFancyNoop = function withFancyNoop() {
+		return this.extend('(withFancyNoop)', {});
+	};
+
+	wrap()
+	.use(withTesting)
+	.use(withFancyNoop)
+	.describe('with multiple plugins', function () {
+		it('calls the plugin\'s hooks an appropriate number of times', function () {
+			assert.equal(testingCount, 1);
+		});
+	});
+
 	describe('#use()', function () {
 		var flag = false;
 		var withDescriptor = function withDescriptor() {
@@ -50,6 +72,25 @@ describe('core JestWrapper semantics', function () {
 			it('fails if not skipped', function () {
 				assert.equal(true, false); // boom
 			});
+		});
+	});
+
+	/**
+	 * Temporarily replace describe so that we can assert on the passed params.
+	 */
+	var originalDescribe = global.describe;
+	var passedDescription;
+	global.describe = function (description) {
+		passedDescription = description;
+		global.describe = originalDescribe; // revert to mocha's describe.
+		return originalDescribe.apply(this, arguments);
+	};
+
+	wrap()
+	.use(withFancyNoop)
+	.describe('wrapped descriptions', function () {
+		it('should pass', function () {
+			assert.equal(passedDescription, 'wrapped: (withFancyNoop):');
 		});
 	});
 
