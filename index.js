@@ -18,7 +18,6 @@ var withGlobal = require('./withGlobal');
 
 var hasPrivacy = typeof WeakMap === 'function';
 var wrapperMap = hasPrivacy ? new WeakMap() : /* istanbul ignore next */ null;
-var descriptionMap = hasPrivacy ? new WeakMap() : /* istanbul ignore next */ null;
 var modeMap = hasPrivacy ? new WeakMap() : /* istanbul ignore next */ null;
 
 var MODE_ALL = 'all';
@@ -54,21 +53,6 @@ var getThisWrappers = function (instance) {
 	return hasPrivacy ? wrapperMap.get(instance) : /* istanbul ignore next */ instance.wrappers;
 };
 
-var setThisDescription = function (instance, value) {
-	checkThis(instance);
-	/* istanbul ignore else */
-	if (hasPrivacy) {
-		descriptionMap.set(instance, value);
-	} else {
-		instance.description = value;
-	}
-	return instance;
-};
-var getThisDescription = function (instance) {
-	checkThis(instance);
-	return hasPrivacy ? descriptionMap.get(instance) : /* istanbul ignore next */ instance.description;
-};
-
 var setThisMode = function (instance, mode) {
 	checkThis(instance);
 	/* istanbul ignore else */
@@ -90,8 +74,8 @@ JestWrapper = function JestWrapper() {
 	setThisMode(this, MODE_ALL);
 };
 
-var createWithWrappers = function (wrappers, description) {
-	return setThisDescription(setThisWrappers(new JestWrapper(), wrappers), description);
+var createWithWrappers = function (wrappers) {
+	return setThisWrappers(new JestWrapper(), wrappers);
 };
 
 var concatThis = function (instance, toConcat) {
@@ -133,11 +117,14 @@ var createAssertion = function createAssertion(type, message, wrappers, block, m
 	if (descriptors.length === 0) {
 		throw new RangeError(inspect(type) + ' called with no wrappers defined');
 	}
+
 	var describeMsgs = [];
-	forEach(wrappers, function (wrapper) {
-		checkThis(wrapper);
-		describeMsgs.push(getThisDescription(wrapper));
+	forEach(descriptors, function (descriptor) {
+		if (descriptor.description) {
+			describeMsgs.push(descriptor.description);
+		}
 	});
+
 	var describeMsg = 'wrapped: ' + describeMsgs.join('; ') + ':';
 	var describeMethod = global.describe;
 	if (mode === MODE_SKIP) {
@@ -227,9 +214,10 @@ JestWrapper.prototype.extend = function extend(description, descriptor) {
 				});
 			}
 		});
+		descriptor.description = description;
 		newWrappers = [createWithWrappers([descriptor])];
 	}
-	return setThisDescription(concatThis(this, newWrappers), description);
+	return concatThis(this, newWrappers);
 };
 
 JestWrapper.prototype.use = function use(plugin) {
