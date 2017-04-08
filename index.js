@@ -184,18 +184,6 @@ JestWrapper.prototype.test.only = function only() {
 	throw new SyntaxError('jest-wrap requires `.only().test` rather than `test.only`');
 };
 
-JestWrapper.prototype.specify = function specify(msg, fn) {
-	var wrappers = getThisWrappers(checkThis(this));
-	var mode = getThisMode(this);
-	createAssertion('specify', msg, wrappers, fn, mode);
-};
-JestWrapper.prototype.specify.skip = function skip() {
-	throw new SyntaxError('jest-wrap requires `.skip().specify` rather than `specify.skip`');
-};
-JestWrapper.prototype.specify.only = function only() {
-	throw new SyntaxError('jest-wrap requires `.only().specify` rather than `specify.only`');
-};
-
 JestWrapper.prototype.describe = function describe(msg, fn) {
 	var wrappers = getThisWrappers(checkThis(this));
 	var mode = getThisMode(this);

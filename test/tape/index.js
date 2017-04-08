@@ -50,8 +50,6 @@ test('jest-wrap', function (t) {
 		st['throws'](function () { wrap().test.only('only'); }, SyntaxError, 'test.only throws');
 		st['throws'](function () { wrap().it.skip('skip'); }, SyntaxError, 'it.skip throws');
 		st['throws'](function () { wrap().it.only('only'); }, SyntaxError, 'it.only throws');
-		st['throws'](function () { wrap().specify.skip('skip'); }, SyntaxError, 'specify.skip throws');
-		st['throws'](function () { wrap().specify.only('only'); }, SyntaxError, 'specify.only throws');
 		st.end();
 	});
 

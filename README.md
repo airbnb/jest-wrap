@@ -8,7 +8,7 @@
 
 [![npm badge][11]][1]
 
-Fluent pluggable interface for easily wrapping `describe`, `it`, `test`, and `specify` blocks in Jest tests.
+Fluent pluggable interface for easily wrapping `describe`, `it`, and `test` blocks in Jest tests.
 
 ## Example
 
@@ -103,7 +103,7 @@ wrap().withFoo().describe…
 ```
 
 ## skip/only
-Although jest has `describe.skip`, `describe.only`, `it.skip`, `it.only`, `test.skip`, `test.only`, `specify.skip`, and `specify.only`, it is not possible to implement these in jest-wrap without using ES5 property accessors. Since this project supports ES3, we decided to use `.skip().describe` etc rather than forfeit the ability to have skip/only.
+Although jest has `describe.skip`, `describe.only`, `it.skip`, `it.only`, `test.skip`, and `test.only`, it is not possible to implement these in jest-wrap without using ES5 property accessors. Since this project supports ES3, we decided to use `.skip().describe` etc rather than forfeit the ability to have skip/only.
 
 ## Tests
 Simply clone the repo, `npm install`, and run `npm test`
