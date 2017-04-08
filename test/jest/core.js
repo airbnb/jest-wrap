@@ -96,6 +96,7 @@ describe('core JestWrapper semantics', function () {
 
 	var calls = [];
 	describe('ordering of before/afters with multiple plugins', function () {
+		var testsRun = 0;
 		wrap().extend('first', {
 			beforeAll: function () { calls.push('>:beforeAll'); },
 			beforeEach: function () { calls.push('>:beforeEach'); },
@@ -107,30 +108,40 @@ describe('core JestWrapper semantics', function () {
 			afterAll: function () { calls.push('>>:afterAll'); },
 			afterEach: function () { calls.push('>>:afterEach'); }
 		}).describe('with method tracking', function () {
-			it('is one test', function () { calls.push('>>>:test'); });
-			it('is another test', function () { calls.push('>>>:test'); });
+			it('is one test', function () {
+				testsRun += 1;
+				calls.push('>>>:test');
+			});
+
+			it('is another test', function () {
+				testsRun += 1;
+				calls.push('>>>:test');
+			});
 		});
-	});
 
-	afterAll(function () {
-		assert.deepEqual(calls, [
-			'>:beforeAll',
-			'>>:beforeAll',
+		it('runs the hooks/tests in the correct order', function () {
+			if (testsRun !== 2) { throw new Error('This test cannot be run in isolation.'); }
+			var expectedCalls = [
+				'>:beforeAll',
+				'>>:beforeAll',
 
-			'>:beforeEach',
-			'>>:beforeEach',
-			'>>>:test',
-			'>>:afterEach',
-			'>:afterEach',
+				'>:beforeEach',
+				'>>:beforeEach',
+				'>>>:test',
+				'>>:afterEach',
+				'>:afterEach',
 
-			'>:beforeEach',
-			'>>:beforeEach',
-			'>>>:test',
-			'>>:afterEach',
-			'>:afterEach',
+				'>:beforeEach',
+				'>>:beforeEach',
+				'>>>:test',
+				'>>:afterEach',
+				'>:afterEach',
 
-			'>>:afterAll',
-			'>:afterAll'
-		]);
+				'>>:afterAll',
+				'>:afterAll'
+			];
+
+			expect(calls).toEqual(expectedCalls);
+		});
 	});
 });
