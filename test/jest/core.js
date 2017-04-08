@@ -88,9 +88,10 @@ describe('core JestWrapper semantics', function () {
 
 	wrap()
 	.use(withFancyNoop)
+	.use(withTesting)
 	.describe('wrapped descriptions', function () {
-		it('should pass', function () {
-			assert.equal(passedDescription, 'wrapped: (withFancyNoop):');
+		it('should have the proper description', function () {
+			assert.equal(passedDescription, 'wrapped: (withFancyNoop); (with Testing):');
 		});
 	});
 
