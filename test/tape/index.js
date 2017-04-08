@@ -17,9 +17,9 @@ var setup = function setup() {
 	global.test = msgFn;
 	global.it = msgFn;
 	var runFn = function (fn) { fn(); };
-	global.before = runFn;
+	global.beforeAll = runFn;
 	global.beforeEach = runFn;
-	global.after = runFn;
+	global.afterAll = runFn;
 	global.afterEach = runFn;
 };
 var teardown = function teardown() {
@@ -65,7 +65,7 @@ test('jest-wrap', function (t) {
 
 	t.test('.supportedMethods', function (st) {
 		st.equal(Array.isArray(wrap.supportedMethods), true, 'is an array');
-		st.deepEqual(wrap.supportedMethods, ['before', 'beforeEach', 'after', 'afterEach'], 'has the expected methods');
+		st.deepEqual(wrap.supportedMethods, ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'], 'has the expected methods');
 		st.end();
 	});
 
@@ -239,10 +239,10 @@ test('JestWrapper', function (t) {
 		var extraDescriptor = instance.extend('…', { foo: 'bar' });
 		st.notEqual(instance, extraDescriptor, 'sanity check: "extend" returns a new instance with descriptor with extra properties');
 
-		st['throws'](function () { instance.extend('…', { before: true }); }, TypeError, 'throws with method override: noncallable function');
-		st['throws'](function () { instance.extend('…', { before: [true] }); }, TypeError, 'throws with method override: array with noncallable function');
+		st['throws'](function () { instance.extend('…', { beforeAll: true }); }, TypeError, 'throws with method override: noncallable function');
+		st['throws'](function () { instance.extend('…', { beforeAll: [true] }); }, TypeError, 'throws with method override: array with noncallable function');
 
-		var validDescriptor = instance.extend('…', { before: function () {}, beforeEach: [], afterEach: [function () {}] });
+		var validDescriptor = instance.extend('…', { beforeAll: function () {}, beforeEach: [], afterEach: [function () {}] });
 		st.notEqual(instance, validDescriptor, 'sanity check: "extend" returns a new instance with valid descriptor');
 
 		st.end();

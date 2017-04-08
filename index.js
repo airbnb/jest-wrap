@@ -25,8 +25,8 @@ var MODE_ALL = 'all';
 var MODE_SKIP = 'skip';
 var MODE_ONLY = 'only';
 
-var beforeMethods = ['before', 'beforeEach'];
-var afterMethods = ['after', 'afterEach'];
+var beforeMethods = ['beforeAll', 'beforeEach'];
+var afterMethods = ['afterAll', 'afterEach'];
 var supportedMethods = [].concat(beforeMethods, afterMethods);
 
 var JestWrapper;
