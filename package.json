@@ -105,10 +105,10 @@
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^11.0.0",
-		"eslint": "^3.17.1",
+		"eslint": "^3.19.0",
 		"faucet": "^0.0.1",
 		"istanbul": "1.1.0-alpha.1",
-		"istanbul-lib-coverage": "^1.0.1",
+		"istanbul-lib-coverage": "^1.0.2",
 		"istanbul-merge": "^1.1.1",
 		"jest": "^19.0.2",
 		"nsp": "^2.6.3",
