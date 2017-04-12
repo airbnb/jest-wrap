@@ -1,3 +1,14 @@
+1.0.2 / 2017-04-11
+=================
+  * [Fix] Fix descriptions when using multiple wrappers (#4)
+  * [Fix] Stop reversing the afterEach hooks (#4)
+  * [Fix] Update global beforeAll/afterAll hooks (#4)
+  * [Fix] Remove .specify() (#4)
+  * [Deps] update `object-inspect`
+  * [Dev Deps] update `eslint`, `istanbul-lib-coverage`
+  * [Tests] up to `node` `v7.9`
+  * [Tests] Update core.js tests to work around bug in jest (#4)
+
 1.0.1 / 2017-03-16
 =================
   * [Fix] avoid exponentially adding outer wrappers (#3)
