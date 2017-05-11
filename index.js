@@ -135,8 +135,7 @@ var createAssertion = function createAssertion(type, message, wrappers, block, m
 	describeMethod(describeMsg, function () {
 		applyMethods(beforeMethods, descriptors);
 		global[type](message, block);
-		applyMethods(['afterEach'], descriptors);
-		applyMethods(['afterAll'], descriptors.reverse());
+		applyMethods(afterMethods, descriptors);
 	});
 };
 
