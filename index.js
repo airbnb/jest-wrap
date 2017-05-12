@@ -9,6 +9,8 @@ var forEach = require('for-each');
 var isArray = require('isarray');
 var functionName = require('function.prototype.name');
 var inspect = require('object-inspect');
+var semver = require('semver');
+var jestVersion = require('jest').getVersion();
 
 var checkWithName = require('./helpers/checkWithName');
 
@@ -27,6 +29,14 @@ var MODE_ONLY = 'only';
 var beforeMethods = ['beforeAll', 'beforeEach'];
 var afterMethods = ['afterAll', 'afterEach'];
 var supportedMethods = [].concat(beforeMethods, afterMethods);
+
+/**
+ * There is a bug in Jest 18/19 that processes the afterAll hooks in the wrong
+ * order. This bit of logic is meant to understand which method Jest is using
+ * for moving through the list of afterAll hooks, and supply them in the order
+ * that gets them applied in the order we want.
+ */
+var needsAfterAllReversal = semver.satisfies(jestVersion, '< 20');
 
 var JestWrapper;
 
@@ -135,8 +145,14 @@ var createAssertion = function createAssertion(type, message, wrappers, block, m
 	describeMethod(describeMsg, function () {
 		applyMethods(beforeMethods, descriptors);
 		global[type](message, block);
-		applyMethods(['afterEach'], descriptors);
-		applyMethods(['afterAll'], descriptors.reverse());
+
+		// See comment at top of file.
+		if (needsAfterAllReversal) {
+			applyMethods(['afterEach'], descriptors);
+			applyMethods(['afterAll'], descriptors.reverse());
+		} else {
+			applyMethods(afterMethods, descriptors);
+		}
 	});
 };
 
