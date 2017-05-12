@@ -33,7 +33,7 @@
 		"pretest": "npm run --silent lint",
 		"test": "npm run --silent tests-only",
 		"posttest": "npm run --silent security",
-		"tests-only": "npm run --silent tape | faucet && npm run --silent jest20",
+		"tests-only": "npm run --silent tape | faucet && npm run --silent jest20 && npm run --silent jest19 && npm run --silent jest18",
 		"lint": "eslint '**/*.js'",
 		"security": "nsp check",
 		"tape": "node test/tape",
