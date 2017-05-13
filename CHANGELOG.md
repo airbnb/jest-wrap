@@ -1,3 +1,10 @@
+1.1.0 / 2017-05-12
+=================
+  * [New] Add jest 20 support (#9)
+  * [Docs] Correct links/badges in the README (#8)
+  * [Tests] on `node` `v7.10`
+  * [Tests] Correct jest18/19 in package.json (#5)
+
 1.0.2 / 2017-04-11
 =================
   * [Fix] Fix descriptions when using multiple wrappers (#4)
