@@ -109,18 +109,17 @@
 		"jest": "^18.0.0 || ^19.0.0 || ^20.0.1"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^11.0.0",
-		"eslint": "^3.19.0",
+		"@ljharb/eslint-config": "^12.2.1",
+		"eslint": "^4.6.0",
 		"faucet": "^0.0.1",
 		"istanbul": "1.1.0-alpha.1",
-		"istanbul-lib-coverage": "^1.0.2",
+		"istanbul-lib-coverage": "^1.1.1",
 		"istanbul-merge": "^1.1.1",
 		"jest": "^20.0.0",
-		"nsp": "^2.6.3",
-		"parallelshell": "^2.0.0",
+		"nsp": "^2.7.0",
 		"rimraf": "^2.6.1",
 		"safe-publish-latest": "^1.1.1",
-		"tape": "^4.6.3"
+		"tape": "^4.8.0"
 	},
 	"engines": {
 		"node": ">= 0.4"
