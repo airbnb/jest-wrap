@@ -54,6 +54,9 @@
 		"jest20.0": "JEST=20.0.0 npm run install:jest && npm run --silent jest",
 		"jest20.x": "JEST=20.x npm run install:jest && npm run --silent jest",
 		"jest20": "npm run --silent jest20.0 && npm run --silent jest20.x",
+		"jest21.0": "JEST=21.0.0 npm run install:jest && npm run --silent jest",
+		"jest21.x": "JEST=21.x npm run install:jest && npm run --silent jest",
+		"jest21": "npm run --silent jest21.0 && npm run --silent jest21.x",
 		"coverage": "npm run --silent jest20.0 && npm run --silent cover:clean && npm run --silent cover:tape && npm run --silent cover:jest && npm run --silent cover:merge && npm run --silent cover:check",
 		"cover:clean": "rimraf coverage",
 		"cover:check": "istanbul check-coverage && echo 100% code coverage, achievement unlocked!",
@@ -106,7 +109,7 @@
 		"semver": "^5.4.1"
 	},
 	"peerDependencies": {
-		"jest": "^18.0.0 || ^19.0.0 || ^20.0.1"
+		"jest": "^18 || ^19 || ^20.0.1 || ^21"
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^12.2.1",
@@ -115,7 +118,7 @@
 		"istanbul": "1.1.0-alpha.1",
 		"istanbul-lib-coverage": "^1.1.1",
 		"istanbul-merge": "^1.1.1",
-		"jest": "^20.0.0",
+		"jest": "^21.0.0",
 		"nsp": "^2.7.0",
 		"rimraf": "^2.6.1",
 		"safe-publish-latest": "^1.1.1",

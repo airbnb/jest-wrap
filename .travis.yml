@@ -22,6 +22,7 @@ env:
     - JEST=18
     - JEST=19
     - JEST=20
+    - JEST=21
 matrix:
   fast_finish: true
   include:
