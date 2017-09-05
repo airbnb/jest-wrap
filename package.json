@@ -119,7 +119,7 @@
 		"istanbul-lib-coverage": "^1.1.1",
 		"istanbul-merge": "^1.1.1",
 		"jest": "^21.0.0",
-		"nsp": "^2.7.0",
+		"nsp": "^2.8.0",
 		"rimraf": "^2.6.1",
 		"safe-publish-latest": "^1.1.1",
 		"tape": "^4.8.0"
