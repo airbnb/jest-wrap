@@ -1,3 +1,12 @@
+1.2.0 / 2017-05-12
+=================
+  * [New] add `jest` `v21` support
+  * [Deps] update `function-bind`, `function.prototype.name`, `object-inspect`, `semver`
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `istanbul-lib-coverage`, `nsp`, `tape`
+  * [Tests] make a matrix of jests
+  * [Tests] only test major node versions; include `v8`
+  * [Tests] use `nvm install-latest-npm` to ensure newer npms don’t break on older nodes
+
 1.1.0 / 2017-05-12
 =================
   * [New] Add jest 20 support (#9)
