@@ -109,13 +109,13 @@ Although jest has `describe.skip`, `describe.only`, `it.skip`, `it.only`, `test.
 Simply clone the repo, `npm install`, and run `npm test`
 
 [1]: https://npmjs.org/package/jest-wrap
-[2]: http://versionbadg.es/ljharb/jest-wrap.svg
-[3]: https://travis-ci.org/ljharb/jest-wrap.svg
-[4]: https://travis-ci.org/ljharb/jest-wrap
-[5]: https://david-dm.org/ljharb/jest-wrap.svg
-[6]: https://david-dm.org/ljharb/jest-wrap
-[7]: https://david-dm.org/ljharb/jest-wrap/dev-status.svg
-[8]: https://david-dm.org/ljharb/jest-wrap#info=devDependencies
+[2]: http://versionbadg.es/airbnb/jest-wrap.svg
+[3]: https://travis-ci.org/airbnb/jest-wrap.svg
+[4]: https://travis-ci.org/airbnb/jest-wrap
+[5]: https://david-dm.org/airbnb/jest-wrap.svg
+[6]: https://david-dm.org/airbnb/jest-wrap
+[7]: https://david-dm.org/airbnb/jest-wrap/dev-status.svg
+[8]: https://david-dm.org/airbnb/jest-wrap#info=devDependencies
 [11]: https://nodei.co/npm/jest-wrap.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/jest-wrap.svg
 [license-url]: LICENSE

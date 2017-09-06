@@ -53,7 +53,7 @@ var setThisWrappers = function (instance, value) {
 	if (hasPrivacy) {
 		wrapperMap.set(instance, value);
 	} else {
-		instance.wrappers = value;
+		instance.wrappers = value; // eslint-disable-line no-param-reassign
 	}
 	return instance;
 };
@@ -69,7 +69,7 @@ var setThisMode = function (instance, mode) {
 	if (hasPrivacy) {
 		modeMap.set(instance, mode);
 	} else {
-		instance.mode = mode;
+		instance.mode = mode; // eslint-disable-line no-param-reassign
 	}
 	return instance;
 };
@@ -79,7 +79,7 @@ var getThisMode = function (instance) {
 	return hasPrivacy ? modeMap.get(instance) : /* istanbul ignore next */ instance.mode;
 };
 
-JestWrapper = function JestWrapper() {
+JestWrapper = function JestWrapper() { // eslint-disable-line no-shadow
 	setThisWrappers(this, []);
 	setThisMode(this, MODE_ALL);
 };
@@ -221,6 +221,7 @@ JestWrapper.prototype.extend = function extend(description, descriptor) {
 		forEach(supportedMethods, function (methodName) {
 			if (methodName in descriptor) {
 				if (!isArray(descriptor[methodName])) {
+					// eslint-disable-next-line no-param-reassign
 					descriptor[methodName] = [descriptor[methodName]];
 				}
 				forEach(descriptor[methodName], function (method) {
@@ -230,7 +231,7 @@ JestWrapper.prototype.extend = function extend(description, descriptor) {
 				});
 			}
 		});
-		descriptor.description = description;
+		descriptor.description = description; // eslint-disable-line no-param-reassign
 		newWrappers = [createWithWrappers([descriptor])];
 	}
 	return concatThis(this, newWrappers);

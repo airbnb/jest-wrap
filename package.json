@@ -68,7 +68,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ljharb/jest-wrap.git"
+		"url": "git+https://github.com/airbnb/jest-wrap.git"
 	},
 	"keywords": [
 		"jest",
@@ -90,9 +90,9 @@
 	],
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/ljharb/jest-wrap/issues"
+		"url": "https://github.com/airbnb/jest-wrap/issues"
 	},
-	"homepage": "https://github.com/ljharb/jest-wrap#readme",
+	"homepage": "https://github.com/airbnb/jest-wrap#readme",
 	"dependencies": {
 		"define-properties": "^1.1.2",
 		"for-each": "^0.3.2",
@@ -112,8 +112,9 @@
 		"jest": "^18 || ^19 || ^20.0.1 || ^21"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^12.2.1",
 		"eslint": "^4.6.0",
+		"eslint-config-airbnb-base": "^12.0.0",
+		"eslint-plugin-import": "^2.7.0",
 		"faucet": "^0.0.1",
 		"istanbul": "1.1.0-alpha.1",
 		"istanbul-lib-coverage": "^1.1.1",
