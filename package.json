@@ -41,10 +41,6 @@
 		"jest:standard": "jest test/jest/*",
 		"jest:only": "jest test/jest-only/*",
 		"install:jest": "npm install jest@\"${JEST}\" && jest --version",
-		"install:jest19.0": "npm install --silent jest@19.0.0 && jest --version",
-		"install:jest19.x": "npm install --silent jest@19.x && jest --version",
-		"install:jest20.0": "npm install --silent jest@20.0.1 && jest --version",
-		"install:jest20.x": "npm install --silent jest@20.x && jest --version",
 		"jest18.0": "JEST=18.0.0 npm run install:jest && npm run --silent jest",
 		"jest18.x": "JEST=18.x npm run install:jest && npm run --silent jest",
 		"jest18": "npm run --silent jest18.0 && npm run --silent jest18.x",
@@ -57,6 +53,9 @@
 		"jest21.0": "JEST=21.0.0 npm run install:jest && npm run --silent jest",
 		"jest21.x": "JEST=21.x npm run install:jest && npm run --silent jest",
 		"jest21": "npm run --silent jest21.0 && npm run --silent jest21.x",
+		"jest22.0": "JEST=22.0.0 npm run install:jest && npm run --silent jest",
+		"jest22.x": "JEST=22.x npm run install:jest && npm run --silent jest",
+		"jest22": "npm run --silent jest22.0 && npm run --silent jest22.x",
 		"coverage": "npm run --silent jest20.0 && npm run --silent cover:clean && npm run --silent cover:tape && npm run --silent cover:jest && npm run --silent cover:merge && npm run --silent cover:check",
 		"cover:clean": "rimraf coverage",
 		"cover:check": "istanbul check-coverage && echo 100% code coverage, achievement unlocked!",
@@ -109,7 +108,7 @@
 		"semver": "^5.4.1"
 	},
 	"peerDependencies": {
-		"jest": "^18 || ^19 || ^20.0.1 || ^21"
+		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22"
 	},
 	"devDependencies": {
 		"eslint": "^4.6.0",
@@ -119,7 +118,7 @@
 		"istanbul": "1.1.0-alpha.1",
 		"istanbul-lib-coverage": "^1.1.1",
 		"istanbul-merge": "^1.1.1",
-		"jest": "^21.0.0",
+		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22",
 		"nsp": "^2.7.0",
 		"rimraf": "^2.6.1",
 		"safe-publish-latest": "^1.1.1",
