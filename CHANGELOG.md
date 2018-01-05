@@ -1,3 +1,10 @@
+1.3.0 / 2018-01-04
+=================
+  * [New] adds support for Jest ^22
+  * [Deps] update `function.prototype.name`, `is-primitive`, `object-inspect`
+  * [Dev Deps] update `eslint`, `eslint-config-airbnb-base`, `eslint-plugin-import`, `nsp`, `rimraf`
+  * Move repo to airbnb
+
 1.2.0 / 2017-05-12
 =================
   * [New] add `jest` `v21` support

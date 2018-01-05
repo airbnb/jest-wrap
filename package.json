@@ -1,6 +1,6 @@
 {
 	"name": "jest-wrap",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"description": "Fluent pluggable interface for easily wrapping `describe` and `it` blocks in Jest tests.",
 	"author": "Jordan Harband <ljharb@gmail.com>",
 	"contributors": [
@@ -40,7 +40,7 @@
 		"jest": "npm run --silent jest:standard && npm run --silent jest:only",
 		"jest:standard": "jest test/jest/*",
 		"jest:only": "jest test/jest-only/*",
-		"install:jest": "npm install jest@\"${JEST}\" && jest --version",
+		"install:jest": "npm install --no-save jest@\"${JEST}\" && jest --version",
 		"jest18.0": "JEST=18.0.0 npm run install:jest && npm run --silent jest",
 		"jest18.x": "JEST=18.x npm run install:jest && npm run --silent jest",
 		"jest18": "npm run --silent jest18.0 && npm run --silent jest18.x",
