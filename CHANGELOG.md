@@ -1,3 +1,9 @@
+1.3.1 / 2018-05-01
+=================
+  * [Fix] ensure that skip works inside plugins, and plugins with no changes but the mode work
+  * [Deps] update `semver`
+  * [Dev Deps] update `eslint`, `istanbul-lib-coverage`, `nsp`, `tape`, `eslint-plugin-import`
+
 1.3.0 / 2018-01-04
 =================
   * [New] adds support for Jest ^22
