@@ -124,7 +124,7 @@ var applyMethods = function applyMethods(methodsToApply, descriptors) {
 
 var createAssertion = function createAssertion(type, message, wrappers, block, mode) {
 	var descriptors = flattenToDescriptors(wrappers);
-	if (descriptors.length === 0) {
+	if (descriptors.length === 0 && mode === MODE_ALL) {
 		throw new RangeError(inspect(type) + ' called with no wrappers defined');
 	}
 
@@ -142,6 +142,7 @@ var createAssertion = function createAssertion(type, message, wrappers, block, m
 	} else if (mode === MODE_ONLY) {
 		describeMethod = global.describe.only;
 	}
+
 	describeMethod(describeMsg, function () {
 		applyMethods(beforeMethods, descriptors);
 		global[type](message, block);
@@ -253,7 +254,8 @@ JestWrapper.prototype.use = function use(plugin) {
 		instance = wrap().extend(descriptorOrInstance.description, descriptorOrInstance);
 	}
 
-	return setThisWrappers(new JestWrapper(), [instance]);
+	var thisMode = getThisMode(instance);
+	return setThisMode(setThisWrappers(new JestWrapper(), [instance]), thisMode);
 };
 
 wrap.register = function register(plugin) {

@@ -4,10 +4,18 @@ var assert = require('assert');
 var wrap = require('../../');
 
 describe('core JestWrapper semantics', function () {
-	it('throws when there are no transformations', function () {
-		assert['throws'](function () { wrap().describe('foo', function () {}); }, RangeError);
-		assert['throws'](function () { wrap().it('foo', function () {}); }, RangeError);
-		assert['throws'](function () { wrap().test('foo', function () {}); }, RangeError);
+	describe('when there are no transformations', function () {
+		it('throws when there are no transformations', function () {
+			assert['throws'](function () { wrap().describe('foo', function () {}); }, RangeError);
+			assert['throws'](function () { wrap().it('foo', function () {}); }, RangeError);
+			assert['throws'](function () { wrap().test('foo', function () {}); }, RangeError);
+		});
+
+		it('does not throw when the mode is "skip"', function () {
+			assert.doesNotThrow(function () { wrap().skip().describe('foo', function () {}); });
+			assert.doesNotThrow(function () { wrap().skip().it('foo', function () {}); });
+			assert.doesNotThrow(function () { wrap().skip().test('foo', function () {}); });
+		});
 	});
 
 	var withNothing = function withNothing() {
@@ -26,6 +34,16 @@ describe('core JestWrapper semantics', function () {
 	var withFancyNoop = function withFancyNoop() {
 		return this.extend('(withFancyNoop)', {});
 	};
+
+	var withSkip = function withSkip() {
+		return this.skip().extend('i am skipped', {});
+	};
+
+	wrap()
+	.use(withSkip)
+	.it('skips a test when the plugin skips it', function () {
+		throw new SyntaxError('this should never run');
+	});
 
 	wrap()
 	.use(withTesting)
