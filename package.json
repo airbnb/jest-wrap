@@ -105,7 +105,7 @@
 		"isarray": "^1.0.0",
 		"object-inspect": "^1.5.0",
 		"object.entries": "^1.0.4",
-		"semver": "^5.4.1"
+		"semver": "^5.5.0"
 	},
 	"peerDependencies": {
 		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22"
