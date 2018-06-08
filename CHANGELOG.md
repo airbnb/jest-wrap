@@ -1,3 +1,7 @@
+1.4.0 / 2018-06-08
+==================
+  * [New] adds support for Jest ^23
+
 1.3.1 / 2018-05-01
 =================
   * [Fix] ensure that skip works inside plugins, and plugins with no changes but the mode work
