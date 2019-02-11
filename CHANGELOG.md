@@ -1,3 +1,7 @@
+1.5.0 / 2019-02-11
+==================
+  * [New] adds support for Jest ^24
+
 1.4.0 / 2018-06-08
 ==================
   * [New] adds support for Jest ^23
