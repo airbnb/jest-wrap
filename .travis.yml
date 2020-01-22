@@ -2,6 +2,7 @@ language: node_js
 os:
  - linux
 node_js:
+  - "12"
   - "10"
   - "8"
   - "6"
@@ -26,6 +27,7 @@ env:
     - JEST=22
     - JEST=23
     - JEST=24
+    - JEST=25
 matrix:
   fast_finish: true
   include:
@@ -36,5 +38,9 @@ matrix:
   exclude:
     - node_js: "4"
       env: JEST=24
+    - node_js: "4"
+      env: JEST=25
+    - node_js: "6"
+      env: JEST=25
   allow_failures:
     - os: osx
