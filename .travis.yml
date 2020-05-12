@@ -28,6 +28,7 @@ env:
     - JEST=23
     - JEST=24
     - JEST=25
+    - JEST=26
 matrix:
   fast_finish: true
   include:
@@ -40,7 +41,11 @@ matrix:
       env: JEST=24
     - node_js: "4"
       env: JEST=25
+    - node_js: "4"
+      env: JEST=26
     - node_js: "6"
       env: JEST=25
+    - node_js: "6"
+      env: JEST=26
   allow_failures:
     - os: osx
