@@ -25,6 +25,7 @@ jobs:
       matrix:
         node-version: ${{ fromJson(needs.matrix.outputs.latest) }}
         jest:
+          - 27
           - 26
           - 25
           - 24
@@ -35,6 +36,12 @@ jobs:
           - 19
           - 18
         exclude:
+          - jest: 27
+            node-version: 8
+          - jest: 27
+            node-version: 6
+          - jest: 27
+            node-version: 4
           - jest: 26
             node-version: 8
           - jest: 26

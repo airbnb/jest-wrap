@@ -13,7 +13,7 @@ describe('core JestWrapper semantics', function () {
 			assert['throws'](function () { wrap().test('foo', function () {}); }, RangeError);
 		});
 
-		it('describe does not throw when the mode is "skip"', function () {
+		(semver.satisfies(jestVersion, '< 27') ? it : it.skip)('describe does not throw when the mode is "skip"', function () {
 			assert.doesNotThrow(function () { wrap().skip().describe('foo', function () {}); });
 		});
 
@@ -145,25 +145,36 @@ describe('core JestWrapper semantics', function () {
 
 		it('runs the hooks/tests in the correct order', function () {
 			if (testsRun !== 2) { throw new Error('This test cannot be run in isolation.'); }
-			var expectedCalls = [
+			var expectedCalls = [].concat(
 				'>:beforeAll',
 				'>>:beforeAll',
 
 				'>:beforeEach',
 				'>>:beforeEach',
 				'>>>:test',
-				'>>:afterEach',
-				'>:afterEach',
+				semver.satisfies(jestVersion, '>= 27') ? [
+					'>:afterEach',
+					'>>:afterEach'
+				] : [
+					'>>:afterEach',
+					'>:afterEach'
+				],
 
 				'>:beforeEach',
 				'>>:beforeEach',
 				'>>>:test',
-				'>>:afterEach',
-				'>:afterEach',
-
-				'>>:afterAll',
-				'>:afterAll'
-			];
+				semver.satisfies(jestVersion, '>= 27') ? [
+					'>:afterEach',
+					'>>:afterEach',
+					'>:afterAll',
+					'>>:afterAll'
+				] : [
+					'>>:afterEach',
+					'>:afterEach',
+					'>>:afterAll',
+					'>:afterAll'
+				]
+			);
 
 			expect(calls).toEqual(expectedCalls);
 		});
