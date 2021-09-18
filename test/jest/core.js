@@ -1,6 +1,8 @@
 'use strict';
 
 var assert = require('assert');
+var jestVersion = require('jest/package.json').version;
+var semver = require('semver');
 var wrap = require('../../');
 
 describe('core JestWrapper semantics', function () {
@@ -11,8 +13,11 @@ describe('core JestWrapper semantics', function () {
 			assert['throws'](function () { wrap().test('foo', function () {}); }, RangeError);
 		});
 
-		it('does not throw when the mode is "skip"', function () {
+		it('describe does not throw when the mode is "skip"', function () {
 			assert.doesNotThrow(function () { wrap().skip().describe('foo', function () {}); });
+		});
+
+		(semver.satisfies(jestVersion, '< 21') ? it : it.skip)('it/test do not throw when the mode is "skip"', function () {
 			assert.doesNotThrow(function () { wrap().skip().it('foo', function () {}); });
 			assert.doesNotThrow(function () { wrap().skip().test('foo', function () {}); });
 		});

@@ -26,49 +26,21 @@
 		"roots": [
 			"<rootDir>/test"
 		],
-		"testRegex": "test/.*\\.js$"
+		"testRegex": "test/.*\\.js$",
+		"testURL": "http://localhost/"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
-		"pretest": "npm run --silent lint",
-		"test": "npm run --silent tests-only",
+		"pretest": "npm run lint",
+		"test": "npm run tests-only",
 		"posttest": "aud --production",
-		"tests-only": "npm run --silent tape | faucet && npm run --silent jest20 && npm run --silent jest19 && npm run --silent jest18",
-		"lint": "eslint '**/*.js'",
-		"tape": "node test/tape",
-		"jest": "npm run --silent jest:standard && npm run --silent jest:only",
+		"tests-only": "nyc npm run tests-all",
+		"tests-all": "npm run tape && npm run jest:standard && npm run jest:only",
+		"lint": "eslint --ext=.js,.mjs .",
+		"tape": "tape test/tape",
 		"jest:standard": "jest test/jest/*",
 		"jest:only": "jest test/jest-only/*",
-		"install:jest": "npm install --no-save jest@\"${JEST}\" && jest --version",
-		"jest18.0": "JEST=18.0.0 npm run install:jest && npm run --silent jest",
-		"jest18.x": "JEST=18.x npm run install:jest && npm run --silent jest",
-		"jest18": "npm run --silent jest18.0 && npm run --silent jest18.x",
-		"jest19.0": "JEST=19.0.0 npm run install:jest && npm run --silent jest",
-		"jest19.x": "JEST=19.x npm run install:jest && npm run --silent jest",
-		"jest19": "npm run --silent jest19.0 && npm run --silent jest19.x",
-		"jest20.0": "JEST=20.0.0 npm run install:jest && npm run --silent jest",
-		"jest20.x": "JEST=20.x npm run install:jest && npm run --silent jest",
-		"jest20": "npm run --silent jest20.0 && npm run --silent jest20.x",
-		"jest21.0": "JEST=21.0.0 npm run install:jest && npm run --silent jest",
-		"jest21.x": "JEST=21.x npm run install:jest && npm run --silent jest",
-		"jest21": "npm run --silent jest21.0 && npm run --silent jest21.x",
-		"jest22.0": "JEST=22.0.0 npm run install:jest && npm run --silent jest",
-		"jest22.x": "JEST=22.x npm run install:jest && npm run --silent jest",
-		"jest22": "npm run --silent jest22.0 && npm run --silent jest22.x",
-		"jest23.0": "JEST=23.0.0 npm run install:jest && npm run --silent jest",
-		"jest23.x": "JEST=23.x npm run install:jest && npm run --silent jest",
-		"jest23": "npm run --silent jest23.0 && npm run --silent jest23.x",
-		"jest24.0": "JEST=24.0.0 npm run install:jest && npm run --silent jest",
-		"jest24.x": "JEST=24.x npm run install:jest && npm run --silent jest",
-		"jest24": "npm run --silent jest24.0 && npm run --silent jest24.x",
-		"coverage": "npm run --silent jest20.0 && npm run --silent cover:clean && npm run --silent cover:tape && npm run --silent cover:jest && npm run --silent cover:merge && npm run --silent cover:check",
-		"cover:clean": "rimraf coverage",
-		"cover:check": "istanbul check-coverage && echo 100% code coverage, achievement unlocked!",
-		"cover:merge": "istanbul-merge --out coverage/coverage.raw.json 'coverage/*/coverage.raw.json' && istanbul report --format html",
-		"cover:tape": "istanbul cover test/tape --dir coverage/tape",
-		"cover:jest": "npm run cover:jest:standard && npm run cover:jest:only",
-		"cover:jest:standard": "npm run jest:standard -- --coverage --coverageDirectory coverage/jest",
-		"cover:jest:only": "npm run jest:only -- --coverage --coverageDirectory coverage/jest-only"
+		"install:jest": "npm install --no-save jest@\"${JEST}\" && jest --version"
 	},
 	"repository": {
 		"type": "git",
@@ -109,8 +81,7 @@
 		"is-symbol": "^1.0.1",
 		"isarray": "^1.0.0 || ^2.0.0",
 		"object-inspect": "^1.6.0",
-		"object.entries": "^1.0.4",
-		"semver": "^5.5.0"
+		"object.entries": "^1.0.4"
 	},
 	"peerDependencies": {
 		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22 || ^23 || ^24 || ^25 || ^26"
@@ -120,13 +91,11 @@
 		"eslint": "^4.19.1",
 		"eslint-config-airbnb-base": "^12.1.0",
 		"eslint-plugin-import": "^2.11.0",
-		"faucet": "^0.0.1",
-		"istanbul": "1.1.0-alpha.1",
-		"istanbul-lib-coverage": "^1.2.0",
-		"istanbul-merge": "^1.1.1",
 		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22 || ^23 || ^24 || ^25 || ^26",
+		"nyc": "^12.0.2",
 		"rimraf": "^2.6.2",
 		"safe-publish-latest": "^1.1.1",
+		"semver": "^6.3.0",
 		"tape": "^4.9.0"
 	},
 	"engines": {

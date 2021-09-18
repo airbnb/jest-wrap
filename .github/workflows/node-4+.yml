@@ -1,0 +1,75 @@
+name: 'Tests: node.js'
+
+on: [pull_request, push]
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      latest: ${{ steps.set-matrix.outputs.requireds }}
+    steps:
+      - uses: ljharb/actions/node/matrix@main
+        id: set-matrix
+        with:
+          versionsAsRoot: true
+          type: 'majors'
+          preset: '4 || 6 || 8 || 10 || 12 || 14 || >=16'
+
+  latest:
+    needs: [matrix]
+    name: 'latest majors'
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ${{ fromJson(needs.matrix.outputs.latest) }}
+        jest:
+          - 26
+          - 25
+          - 24
+          - 23
+          - 22
+          - 21
+          - 20
+          - 19
+          - 18
+        exclude:
+          - jest: 26
+            node-version: 8
+          - jest: 26
+            node-version: 6
+          - jest: 26
+            node-version: 4
+          - jest: 25
+            node-version: 6
+          - jest: 25
+            node-version: 4
+          - jest: 24
+            node-version: 4
+          - jest: 23
+            node-version: 4
+          - jest: 22
+            node-version: 4
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ljharb/actions/node/install@main
+        name: 'nvm install ${{ matrix.node-version }} && npm install'
+        with:
+          node-version: ${{ matrix.node-version }}
+          skip-ls-check: true
+      - run: npm run install:jest
+        env:
+          JEST: ${{ matrix.jest }}
+      - run: npm prune
+      - run: npm ls >/dev/null
+      - run: npm run tests-only
+      - uses: codecov/codecov-action@v1
+
+  node:
+    name: 'node 4+'
+    needs: [latest]
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo tests completed'
