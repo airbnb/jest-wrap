@@ -32,12 +32,9 @@
 		"prepublish": "safe-publish-latest",
 		"pretest": "npm run --silent lint",
 		"test": "npm run --silent tests-only",
-		"posttest": "npm run audit",
+		"posttest": "aud --production",
 		"tests-only": "npm run --silent tape | faucet && npm run --silent jest20 && npm run --silent jest19 && npm run --silent jest18",
 		"lint": "eslint '**/*.js'",
-		"preaudit": "npm install --package-lock --package-lock-only",
-		"audit": "npm audit",
-		"postaudit": "rm package-lock.json",
 		"tape": "node test/tape",
 		"jest": "npm run --silent jest:standard && npm run --silent jest:only",
 		"jest:standard": "jest test/jest/*",
@@ -119,6 +116,7 @@
 		"jest": "^18 || ^19 || ^20.0.1 || ^21 || ^22 || ^23 || ^24 || ^25 || ^26"
 	},
 	"devDependencies": {
+		"aud": "^1.1.5",
 		"eslint": "^4.19.1",
 		"eslint-config-airbnb-base": "^12.1.0",
 		"eslint-plugin-import": "^2.11.0",
